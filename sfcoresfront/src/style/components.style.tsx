@@ -84,6 +84,7 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 justify-content: space-evenly;
+max-width: 1920px;
 `
 
 export const CardStyled = styled.div`
