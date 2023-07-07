@@ -9,16 +9,18 @@ const HomePage = () => {
     const [data, setData] = React.useState<BusinessType[]>([])
 
     async function getData() {
-        await axios.get(`${URI}/business`, {
-            headers: {
-                "Accept": "application/json"
-            }
-        }).then(({data})=> {
-            const businessList = data as BusinessType[];
-            setData(businessList);
-        }).catch((err)=>{
-            setData([]);
-        })
+        if (data.length < 1) {
+            await axios.get(`${URI}/business`, {
+                headers: {
+                    "Accept": "application/json"
+                }
+            }).then(({data})=> {
+                const businessList = data as BusinessType[];
+                setData(businessList);
+            }).catch((err)=>{
+                setData([]);
+            })
+        } 
     }
     React.useEffect(() => {
         const start = async () => {

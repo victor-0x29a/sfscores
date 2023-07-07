@@ -16,7 +16,7 @@ const SidebarComponent = () => {
                 <ol>
                     {URIDatas.map((data, index)=> (
                         <li key={index}>
-                            <NavLink to={data.Uri}>
+                            <NavLink to={data.Uri} replace={true}>
                                 {data.Text}
                             </NavLink>
                         </li>

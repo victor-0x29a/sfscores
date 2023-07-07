@@ -23,7 +23,7 @@ app.MapGet("/business", async (BusinessDb db) =>
         b.name,
         b.owner_name,
         b.business_id
-    }).Take(100)
+    })
     .ToListAsync();
     return data;
 });
