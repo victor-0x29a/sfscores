@@ -1,0 +1,4 @@
+sfscoresfront/node_modules/**
+CoresAPI/.vs/**
+CoresAPI/CoresAPI/bin/**
+CoresAPI/CoresAPI/obj/**
