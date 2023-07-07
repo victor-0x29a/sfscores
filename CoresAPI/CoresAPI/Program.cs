@@ -1,4 +1,5 @@
 using CoresAPI;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
@@ -18,20 +19,39 @@ app.UseCors();
 app.MapGet("/business", async (BusinessDb db) =>
 {
 
-    var data = await db.businesses
-    .Select(b => new {
-        b.name,
-        b.owner_name,
-        b.business_id
-    })
-    .ToListAsync();
-    return data;
+    try
+    {
+        var data = await db.businesses
+        .Select(b => new {
+            b.name,
+            b.owner_name,
+            b.business_id
+        })
+        .ToListAsync();
+        return Results.Ok(data);
+    } catch
+    {
+        return Results.Problem();
+    }
+
 });
 
 app.MapGet("/business/{business_id}", async (string business_id, BusinessDb db) =>
 {
-    var data = await db.businesses.Where(c => c.business_id == int.Parse(business_id)).Take(1).ToListAsync();
-    return data;
+    try
+    {
+        int Id;
+        bool hasNumber = int.TryParse(business_id, out Id);
+        if (!hasNumber) return Results.BadRequest();
+
+        var data = await db.businesses.Where(c => c.business_id == Id).Take(1).ToListAsync();
+        return Results.Ok(data);
+    } catch
+    {
+        return Results.Problem();
+    }
+    
+    
 });
 
 app.Run();
