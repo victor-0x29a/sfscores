@@ -80,11 +80,13 @@ ul {
 `
 
 export const ContainerStyled = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-evenly;
-max-width: 1920px;
+.scroller-corps {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 1920px;
+}
 `
 
 export const CardStyled = styled.div`
