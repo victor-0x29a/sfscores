@@ -1,5 +1,6 @@
 using CoresAPI;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
@@ -16,11 +17,21 @@ builder.Services.AddCors(opt => {
 });
 var app = builder.Build();
 app.UseCors();
-app.MapGet("/business", async (BusinessDb db) =>
+
+app.MapGet("/business", async ([FromQuery()] string? corp, BusinessDb db) =>
 {
 
     try
     {
+        if (!string.IsNullOrEmpty(corp)) {
+            string Name = corp.ToString();
+            var Data = await db.businesses.Where(b => b.name.Contains(Name)).Select(b => new {
+                b.name,
+                b.owner_name,
+                b.business_id
+            }).ToListAsync();
+            return Results.Ok(Data);
+        }
         var data = await db.businesses
         .Select(b => new {
             b.name,
@@ -53,5 +64,7 @@ app.MapGet("/business/{business_id}", async (string business_id, BusinessDb db) 
     
     
 });
+
+
 
 app.Run();
