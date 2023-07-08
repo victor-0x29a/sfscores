@@ -4,6 +4,7 @@ import { ContainerStyled } from '../style/components.style'
 import CardComponent from './card.component'
 import InfiniteScroll from "react-infinite-scroller";
 import { BusinessType } from '../types/business.type';
+import LoadingComponent from './loading.component';
 
 const ContainerComponent = ({business}: ContainerProps) => {
     const [loaded, setLoaded] = React.useState<BusinessType[]>([])
@@ -22,7 +23,7 @@ const ContainerComponent = ({business}: ContainerProps) => {
             pageStart={0}
             loadMore={load}
             hasMore={true}
-            loader={<div className="loader" key={0}>Loading ...</div>}
+            loader={<LoadingComponent/>}
             className='scroller-corps'
             >
         {loaded.map((data, index)=> (

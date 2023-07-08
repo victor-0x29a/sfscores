@@ -4,6 +4,7 @@ import { BusinessType } from '../types/business.type'
 import { URI } from '../data/backend.data'
 import ContainerComponent from '../components/container.component'
 
+
 const HomePage = () => {
 
     const [data, setData] = React.useState<BusinessType[]>([])
