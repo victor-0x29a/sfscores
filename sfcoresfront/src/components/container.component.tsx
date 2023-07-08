@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { BusinessType } from '../types/business.type';
 import LoadingComponent from './loading.component';
 
-const ContainerComponent = ({business}: ContainerProps) => {
+const ContainerComponent = ({business, search}: ContainerProps) => {
     const [loaded, setLoaded] = React.useState<BusinessType[]>([])
 
     const load = () => {
@@ -20,13 +20,15 @@ const ContainerComponent = ({business}: ContainerProps) => {
 
     return <ContainerStyled>
          <InfiniteScroll
-            pageStart={0}
+            pageStart={loaded.length}
             loadMore={load}
             hasMore={true}
             loader={<LoadingComponent/>}
             className='scroller-corps'
             >
-        {loaded.map((data, index)=> (
+        {!search ? loaded.map((data, index)=> (
+            <CardComponent key={index} business={data}/>
+        ) ) : business.map((data, index)=> (
             <CardComponent key={index} business={data}/>
         ) )}    
     </InfiniteScroll>

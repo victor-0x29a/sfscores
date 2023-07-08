@@ -155,3 +155,10 @@ div {
     }
 }
 `
+
+export const Container = styled.div`
+margin-top: 2em;
+margin-bottom: 2em;
+display: flex;
+justify-content: center;
+`

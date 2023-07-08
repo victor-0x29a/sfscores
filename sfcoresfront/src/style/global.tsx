@@ -57,6 +57,25 @@ const GlobalStyle = createGlobalStyle`
         font-size: 2.39rem;
     }
 }
+
+input {
+    border: 0;
+    outline: 0;
+    border-bottom: 3px solid black;
+    color: var(--textColor);
+    font-family: var(--normalFont);
+    font-size: 2.24rem;
+    padding: 3px;
+    &::placeholder {
+        color: gray;
+    }
+}
+
+@media screen and (max-width: 800px){
+    input {
+        font-size: 1.5rem;
+    }
+}
 `
 
 
